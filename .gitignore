@@ -24,3 +24,7 @@ pnpm-debug.log*
 .idea/
 
 .vercel
+
+# Agent skills (internal tooling)
+.agents/
+skills-lock.json

@@ -5,6 +5,11 @@ import Hero from "@/components/Hero.astro";
 import Trayectoria from "@/components/Trayectoria.astro";
 import Consultorios from "@/components/Consultorios.astro";
 import Footer from "@/components/Footer.astro";
+
+const siteUrl = "https://dr-pablo-carrara.vercel.app";
+const pageTitle = "Dr. Pablo Carrara | Gastroenterólogo en Santa Fe";
+const pageDescription = "Dr. Pablo Carrara, gastroenterólogo especialista en Endoscopia Digestiva en Santa Fe, Argentina. Atención en Clínica San Gerónimo y Sanatorio Diagnóstico. Turnos por WhatsApp.";
+const ogImage = `${siteUrl}/images/PabloCarraraProfile.jpg`;
 ---
 
 <!DOCTYPE html>
@@ -12,19 +17,158 @@ import Footer from "@/components/Footer.astro";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Dr. Pablo Carrara - Gastroenterólogo en Santa Fe, Argentina. Especialista en Endoscopia Digestiva." />
     <meta name="generator" content={Astro.generator} />
-    <title>Dr. Pablo Carrara | Gastroenterólogo</title>
+
+    <!-- Primary Meta Tags -->
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    <meta name="keywords" content="gastroenterólogo Santa Fe, endoscopia digestiva Santa Fe, Dr Pablo Carrara, gastroenterología Santa Fe, endoscopia Santa Fe, médico digestivo Santa Fe, turno gastroenterólogo" />
+    <meta name="author" content="Dr. Pablo Carrara" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={siteUrl} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={siteUrl} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="es_AR" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={siteUrl} />
+    <meta property="twitter:title" content={pageTitle} />
+    <meta property="twitter:description" content={pageDescription} />
+    <meta property="twitter:image" content={ogImage} />
+
+    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Preconnect for fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+    <!-- Schema.org JSON-LD: Physician + MedicalBusiness -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Physician",
+            "@id": "https://dr-pablo-carrara.vercel.app/#physician",
+            "name": "Dr. Pablo Carrara",
+            "image": "https://dr-pablo-carrara.vercel.app/images/PabloCarraraProfile.jpg",
+            "description": "Gastroenterólogo especialista en Endoscopia Digestiva en Santa Fe, Argentina.",
+            "url": "https://dr-pablo-carrara.vercel.app",
+            "medicalSpecialty": [
+              {
+                "@type": "MedicalSpecialty",
+                "name": "Gastroenterología"
+              },
+              {
+                "@type": "MedicalSpecialty",
+                "name": "Endoscopia Digestiva"
+              }
+            ],
+            "jobTitle": "Gastroenterólogo",
+            "worksFor": [
+              { "@id": "https://dr-pablo-carrara.vercel.app/#clinica-san-geronimo" },
+              { "@id": "https://dr-pablo-carrara.vercel.app/#sanatorio-diagnostico" }
+            ],
+            "areaServed": {
+              "@type": "City",
+              "name": "Santa Fe",
+              "containedInPlace": {
+                "@type": "Country",
+                "name": "Argentina"
+              }
+            },
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Santa Fe",
+              "addressCountry": "AR"
+            }
+          },
+          {
+            "@type": "MedicalBusiness",
+            "@id": "https://dr-pablo-carrara.vercel.app/#clinica-san-geronimo",
+            "name": "Clínica Médica San Gerónimo",
+            "description": "Consultorio de gastroenterología y endoscopia digestiva del Dr. Pablo Carrara.",
+            "url": "https://wa.me/+5493424791179",
+            "telephone": "+54 9 342 479-1179",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "9 de Julio 3365",
+              "addressLocality": "Santa Fe",
+              "addressCountry": "AR"
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": "-31.6366333",
+              "longitude": "-60.7064833"
+            },
+            "openingHoursSpecification": {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+              "opens": "08:00",
+              "closes": "18:00"
+            }
+          },
+          {
+            "@type": "MedicalBusiness",
+            "@id": "https://dr-pablo-carrara.vercel.app/#sanatorio-diagnostico",
+            "name": "Sanatorio Diagnóstico",
+            "description": "Unidad de Endoscopia Digestiva del Dr. Pablo Carrara.",
+            "url": "https://wa.me/+5493425516681",
+            "telephone": "+54 9 342 551-6681",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "25 de Mayo 3240",
+              "addressLocality": "Santa Fe",
+              "addressCountry": "AR"
+            },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": "-31.6386185",
+              "longitude": "-60.7056164"
+            },
+            "openingHoursSpecification": {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+              "opens": "08:00",
+              "closes": "18:00"
+            }
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://dr-pablo-carrara.vercel.app/#website",
+            "url": "https://dr-pablo-carrara.vercel.app",
+            "name": "Dr. Pablo Carrara",
+            "description": "Gastroenterólogo especialista en Endoscopia Digestiva en Santa Fe, Argentina.",
+            "inLanguage": "es-AR",
+            "publisher": { "@id": "https://dr-pablo-carrara.vercel.app/#physician" }
+          },
+          {
+            "@type": "WebPage",
+            "@id": "https://dr-pablo-carrara.vercel.app/#webpage",
+            "url": "https://dr-pablo-carrara.vercel.app",
+            "name": "Dr. Pablo Carrara | Gastroenterólogo en Santa Fe",
+            "description": "Dr. Pablo Carrara, gastroenterólogo especialista en Endoscopia Digestiva en Santa Fe, Argentina. Turnos por WhatsApp.",
+            "isPartOf": { "@id": "https://dr-pablo-carrara.vercel.app/#website" },
+            "about": { "@id": "https://dr-pablo-carrara.vercel.app/#physician" },
+            "inLanguage": "es-AR"
+          }
+        ]
+      }
+    </script>
   </head>
   <body class="min-h-screen flex flex-col">
     <Header />
 
-    <main class="flex-grow pt-20 pb-16">
+    <main class="flex-grow pt-20 pb-16" aria-label="Contenido principal">
       <Hero />
       <Trayectoria />
       <Consultorios />

@@ -1,0 +1,115 @@
+---
+interface NavLink {
+  label: string;
+  href: string;
+  active?: boolean;
+}
+
+interface Props {
+  logoText?: string;
+  navLinks?: NavLink[];
+}
+
+const {
+  logoText = "Dr. Pablo Carrara",
+  navLinks = [
+    { label: "Inicio", href: "#", active: true },
+    { label: "Experiencia", href: "#trayectoria" },
+    { label: "Contacto", href: "#contacto" },
+  ],
+} = Astro.props;
+---
+
+<header id="site-header" class="fixed top-0 w-full z-50 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm">
+  <div class="flex items-center justify-between px-6 py-4 max-w-[1128px] mx-auto">
+    <span class="text-base font-bold text-slate-900 dark:text-slate-50">
+      {logoText}
+    </span>
+
+    <nav class="hidden md:flex items-center gap-8" id="main-nav">
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          data-nav-link
+          data-target={link.href}
+          class={`
+            text-sm font-medium pb-1 transition-colors
+            ${link.active
+              ? "text-primary border-b-2 border-primary"
+              : "text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-blue-300"
+            }
+          `}
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
+
+    {/* Spacer to balance layout on mobile */}
+    <div class="w-24 md:hidden"></div>
+  </div>
+</header>
+
+<script>
+  (function () {
+    const navLinks = document.querySelectorAll<HTMLAnchorElement>("[data-nav-link]");
+    const sections = document.querySelectorAll<HTMLElement>("section[id]");
+    const footer = document.querySelector<HTMLElement>("footer[id]");
+
+    // Map section ids to nav target hrefs
+    const sectionToNav: Record<string, string> = {
+      "trayectoria": "#trayectoria",
+      "lugares": "#contacto",
+      "contacto": "#contacto",
+    };
+
+    function setActiveLink(targetHref: string) {
+      navLinks.forEach((link) => {
+        const isActive = link.getAttribute("data-target") === targetHref;
+        if (isActive) {
+          link.classList.add("text-primary", "border-b-2", "border-primary");
+          link.classList.remove("text-slate-600", "dark:text-slate-400", "hover:text-primary", "dark:hover:text-blue-300");
+        } else {
+          link.classList.remove("text-primary", "border-b-2", "border-primary");
+          link.classList.add("text-slate-600", "dark:text-slate-400", "hover:text-primary", "dark:hover:text-blue-300");
+        }
+      });
+    }
+
+    // Handle click
+    navLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        const target = link.getAttribute("data-target") || "";
+        setActiveLink(target);
+      });
+    });
+
+    // IntersectionObserver to update active link on scroll
+    const observerOptions = {
+      root: null,
+      rootMargin: "-80px 0px -60% 0px",
+      threshold: 0,
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute("id");
+          if (id && sectionToNav[id]) {
+            setActiveLink(sectionToNav[id]);
+          }
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach((section) => observer.observe(section));
+    if (footer) observer.observe(footer);
+
+    // Fallback: if at top, set Inicio active
+    window.addEventListener("scroll", () => {
+      if (window.scrollY < 100) {
+        setActiveLink("#");
+      }
+    });
+  })();
+</script>

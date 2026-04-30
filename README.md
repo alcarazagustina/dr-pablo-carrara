@@ -1,46 +1,59 @@
-# Astro Starter Kit: Basics
+# Dr. Pablo Carrara
 
-```sh
-npm create astro@latest -- --template basics
-```
+Sitio web personal del Dr. Pablo Carrara, Gastroenterólogo en Santa Fe, Argentina.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Descripción
 
-## 🚀 Project Structure
+Landing page profesional que presenta la trayectoria, consultorios y servicios del Dr. Pablo Carrara, especialista en Gastroenterología y Endoscopia Digestiva.
 
-Inside of your Astro project, you'll see the following folders and files:
+## Tecnologías
+
+- **Astro** — Framework web moderno y rápido
+- **React** — Componentes interactivos (shadcn/ui)
+- **Tailwind CSS** — Estilos utilitarios y responsive
+- **TypeScript** — Tipado seguro
+
+## Comandos
+
+| Comando           | Acción                                           |
+| :---------------- | :----------------------------------------------- |
+| `npm install`     | Instalar dependencias                            |
+| `npm run dev`     | Iniciar servidor de desarrollo en `localhost:4321` |
+| `npm run build`   | Compilar sitio para producción en `./dist/`       |
+| `npm run preview` | Previsualizar build localmente                    |
+
+## Estructura del proyecto
 
 ```text
 /
 ├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
+│   ├── favicon.svg
+│   └── images/
+│       └── PabloCarraraProfile.jpg
+├── src/
+│   ├── components/
+│   │   ├── Header.astro
+│   │   ├── Hero.astro
+│   │   ├── Trayectoria.astro
+│   │   ├── Consultorios.astro
+│   │   ├── Footer.astro
+│   │   └── ui/
+│   │       └── button.tsx
+│   ├── lib/
+│   │   └── utils.ts
+│   ├── pages/
+│   │   └── index.astro
+│   └── styles/
+│       └── globals.css
+├── astro.config.mjs
+├── tailwind.config.mjs
 └── package.json
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## Desarrollo
 
-## 🧞 Commands
+Requiere Node.js >= 22.12.0
 
-All commands are run from the root of the project, from a terminal:
+## Licencia
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+© 2024 Dr. Pablo Carrara

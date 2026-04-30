@@ -1,0 +1,89 @@
+---
+import { Button } from "@/components/ui/button";
+
+interface Clinic {
+  name: string;
+  service: string;
+  address: string;
+  mapEmbedUrl: string;
+  whatsappLink: string;
+}
+
+interface Props {
+  title?: string;
+  clinics?: Clinic[];
+}
+
+const {
+  title = "Consultorios",
+  clinics = [
+    {
+      name: "Clínica Médica San Gerónimo",
+      service: "Gastroenterología - Endoscopia Digestiva",
+      address: "9 de Julio 3365, Santa Fe",
+      mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3396.8983562601543!2d-60.70905812458907!3d-31.63663327416095!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95b5a9b88cbe5123%3A0x679b8bdda6845708!2zQ2zDrW5pY2EgTcOpZGljYSBTYW4gR2Vyw7NuaW1v!5e0!3m2!1ses!2sar!4v1777561714951!5m2!1ses!2sar",
+      whatsappLink: "https://wa.me/+5493424791179",
+    },
+    {
+      name: "Sanatorio Diagnóstico",
+      service: "Gastroenterología - Endoscopia Digestiva",
+      address: "25 de Mayo 3240, Santa Fe",
+      mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3396.8258417521606!2d-60.7081992182064!3d-31.638618507533582!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95b5a9beb5e420ab%3A0x8f3a37eaa999ed26!2sSanatorio%20Diagn%C3%B3stico!5e0!3m2!1ses!2sar!4v1777561835916!5m2!1ses!2sar",
+      whatsappLink: "https://wa.me/+5493425516681",
+    },
+  ],
+} = Astro.props;
+---
+
+<section id="lugares" class="max-w-[1128px] mx-auto px-6 mb-16">
+  <h2 class="text-2xl md:text-[32px] font-semibold text-on-background mb-8 text-center md:text-left leading-tight">
+    {title}
+  </h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    {clinics.map((clinic) => (
+      <article class="bg-surface-container-lowest border border-outline-variant/30 rounded-xl shadow-[0px_4px_12px_rgba(0,0,0,0.08)] overflow-hidden flex flex-col transition-all duration-300 hover:border-primary">
+        <div class="p-5 flex flex-col h-full">
+          <h3 class="text-xl md:text-2xl font-semibold text-on-background mb-1">
+            {clinic.name}
+          </h3>
+
+          <p class="text-base text-on-surface-variant mb-1">
+            {clinic.service}
+          </p>
+
+          <p class="text-sm text-on-surface-variant/80 mb-4 flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary text-base">map</span>
+            {clinic.address}
+          </p>
+
+          <div class="rounded-lg overflow-hidden bg-surface-container border border-outline-variant/20 mb-5 flex-shrink-0">
+            <iframe
+              src={clinic.mapEmbedUrl}
+              width="100%"
+              height="200"
+              style="border:0;"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title={`Mapa de ${clinic.name}`}
+              class="w-full"
+            ></iframe>
+          </div>
+
+          <div class="mt-auto">
+            <Button
+              variant="default"
+              size="lg"
+              href={clinic.whatsappLink}
+              className="w-full flex items-center justify-center gap-2"
+            >
+              <span class="material-symbols-outlined text-base">chat</span>
+              Sacar Turno
+            </Button>
+          </div>
+        </div>
+      </article>
+    ))}
+  </div>
+</section>

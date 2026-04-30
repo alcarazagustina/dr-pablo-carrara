@@ -1,0 +1,22 @@
+---
+interface Props {
+  name?: string;
+  specialty?: string;
+}
+
+const {
+  name = "Pablo Carrara",
+  specialty = "Gastroenterología • Endoscopia",
+} = Astro.props;
+---
+
+<footer id="contacto" class="bg-[#F3F2EF] dark:bg-slate-950 w-full py-6 mt-auto border-t border-slate-200 dark:border-slate-800">
+  <div class="px-6 max-w-[1128px] mx-auto">
+    <span class="text-base font-bold text-slate-700 dark:text-slate-200 block">
+      {name}
+    </span>
+    <span class="text-sm text-slate-500 dark:text-slate-400 block mt-0.5">
+      {specialty}
+    </span>
+  </div>
+</footer>

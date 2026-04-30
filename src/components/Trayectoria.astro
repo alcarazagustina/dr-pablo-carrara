@@ -1,0 +1,119 @@
+---
+interface Experience {
+  title: string;
+  institution: string;
+  startDate: string;  // Format: "YYYY-MM"
+  endDate?: string;   // Format: "YYYY-MM", omit for current
+  location: string;
+}
+
+interface Props {
+  title?: string;
+  experiences?: Experience[];
+}
+
+const monthNames = [
+  "ene.", "feb.", "mar.", "abr.", "may.", "jun.",
+  "jul.", "ago.", "sep.", "oct.", "nov.", "dic.",
+];
+
+function formatDate(dateStr: string): string {
+  const [year, month] = dateStr.split("-").map(Number);
+  return `${monthNames[month - 1]} ${year}`;
+}
+
+function calculateDuration(startDateStr: string, endDateStr?: string): string {
+  const start = new Date(startDateStr + "-01");
+  const end = endDateStr ? new Date(endDateStr + "-01") : new Date();
+
+  let years = end.getFullYear() - start.getFullYear();
+  let months = end.getMonth() - start.getMonth();
+
+  if (months < 0) {
+    years -= 1;
+    months += 12;
+  }
+
+  const yearText = years === 1 ? "1 año" : `${years} años`;
+  const monthText = months === 1 ? "1 mes" : `${months} meses`;
+
+  if (years === 0) return monthText;
+  if (months === 0) return yearText;
+  return `${yearText} ${monthText}`;
+}
+
+const {
+  title = "Mi Trayectoria",
+  experiences = [
+    {
+      title: "Gastroenterólogo",
+      institution: "Sanatorio San Gerónimo",
+      startDate: "2021-05",
+      location: "Santa Fe, Argentina",
+    },
+    {
+      title: "Gastroenterólogo",
+      institution: "Sanatorio Diagnóstico",
+      startDate: "2020-10",
+      location: "Santa Fe, Argentina",
+    },
+    {
+      title: "Gastroenterólogo",
+      institution: "Sanatorio Güemes",
+      startDate: "2019-07",
+      endDate: "2022-09",
+      location: "Santa Fe, Argentina",
+    },
+  ],
+} = Astro.props;
+---
+
+<section id="trayectoria" class="max-w-[1128px] mx-auto px-6 mb-16">
+  <div class="bg-surface-container-lowest border border-black/10 rounded-xl shadow-sm p-6 md:p-8">
+    <div class="flex items-center gap-3 mb-8">
+      <span class="material-symbols-outlined text-primary text-2xl">work</span>
+      <h2 class="text-2xl md:text-[32px] font-bold text-on-background leading-tight">
+        {title}
+      </h2>
+    </div>
+
+    <div class="space-y-0">
+      {experiences.map((exp, index) => {
+        const startFormatted = formatDate(exp.startDate);
+        const endFormatted = exp.endDate ? formatDate(exp.endDate) : "actualidad";
+        const durationText = calculateDuration(exp.startDate, exp.endDate);
+        const isLast = index === experiences.length - 1;
+
+        return (
+          <div class="flex gap-4 md:gap-6">
+            {/* Icon column with timeline line */}
+            <div class="flex flex-col items-center flex-shrink-0">
+              <div class="w-10 h-10 md:w-12 md:h-12 bg-surface-container-high rounded-lg flex items-center justify-center border border-outline-variant">
+                <span class="material-symbols-outlined text-on-surface-variant text-lg md:text-xl">medical_services</span>
+              </div>
+              {!isLast && (
+                <div class="w-px flex-1 bg-outline-variant/50 min-h-[40px] md:min-h-[48px]"></div>
+              )}
+            </div>
+
+            {/* Content */}
+            <div class="flex-1 pb-8 md:pb-10">
+              <h3 class="text-base font-semibold text-on-surface">
+                {exp.title}
+              </h3>
+              <p class="text-sm font-medium text-on-surface-variant uppercase tracking-wide mt-0.5">
+                {exp.institution}
+              </p>
+              <p class="text-sm text-outline mt-1">
+                {startFormatted} - {endFormatted} · {durationText}
+              </p>
+              <p class="text-sm text-on-surface-variant mt-0.5">
+                {exp.location}
+              </p>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>

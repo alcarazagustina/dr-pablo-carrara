@@ -1,11 +1,35 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import "@/styles/globals.css";
+import Header from "@/components/Header.astro";
+import Hero from "@/components/Hero.astro";
+import Trayectoria from "@/components/Trayectoria.astro";
+import Consultorios from "@/components/Consultorios.astro";
+import Footer from "@/components/Footer.astro";
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Dr. Pablo Carrara - Gastroenterólogo en Santa Fe, Argentina. Especialista en Endoscopia Digestiva." />
+    <meta name="generator" content={Astro.generator} />
+    <title>Dr. Pablo Carrara | Gastroenterólogo</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <Header />
+
+    <main class="flex-grow pt-20 pb-16">
+      <Hero />
+      <Trayectoria />
+      <Consultorios />
+    </main>
+
+    <Footer />
+  </body>
+</html>
